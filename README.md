@@ -15,4 +15,6 @@ MD5 and SHA1 hash cracker
 
 ## Running The Cracker
 
-Syntax: `fohmd5.py HASH.txt -a ATTACK TYPE -d DICTIONARY`
+### Syntax
+
+`fohmd5.py HASH.txt -a ATTACK TYPE -d DICTIONARY`
