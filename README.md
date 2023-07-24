@@ -17,4 +17,8 @@ MD5 and SHA1 hash cracker
 
 ### Syntax
 
-`fohmd5.py HASH.txt -a ATTACK TYPE -d DICTIONARY`
+`fohmd5.py path/to/hash.txt -a ATTACK TYPE -d path/to/dictionary.txt`
+
+### Options
+
+`Attack types: dict (Dictionary), brute (Brute-Force)`
