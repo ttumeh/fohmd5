@@ -1,7 +1,9 @@
 import hashlib
 import argparse
 from tqdm.auto import tqdm
-
+import string
+import time
+from itertools import permutations
 
 """
 Encode password to MD5
@@ -11,9 +13,9 @@ def md5_hash(password):
 
 
 """
-Crack MD5 hash
+Crack MD5 hash using dictionary
 """
-def crack_hash_parallel(hash_list, hash_type, dictionary_path):
+def crack_md5_dict(hash_list, hash_type, dictionary_path):
 
     print(f'Cracking {hash_list}.....')
     print(f'Using dictionary from {dictionary_path}.....')
@@ -28,14 +30,39 @@ def crack_hash_parallel(hash_list, hash_type, dictionary_path):
             password = line.strip()
             hashed_pass = md5_hash(password)
             if (hashed_pass == hash_list):
-                print(f"\n\nHash {hash} cracked: {password}")
+                print(f"\n\nHash {hash} cracked: {password}\n")
                 break
             else: 
                 print(f'\rCracking Progress: ({index}/{num_lines})', end='', flush=True)
                 # Update tqdm progress bar
                 progress_bar.update(1)
 
-    print('\n\nPassword not found')
+    print('\n\nPassword not found. Try another dictionary.\n')
+
+
+"""
+Crack MD5 hash using brute-force
+"""
+def crack_md5_brute(hash_list):
+    print(f'Cracking {hash_list}.....')
+    UP = "\x1B[3A"
+    CLR = "\x1B[0K"
+    index = 1
+    iteration = 1
+    # Infinite loop until user exits program
+    while True:
+        perms = list(permutations(string.printable, index))
+        for perm in perms:
+            # Print current combination and iteration
+            print(f'{UP}Testing combination: {perm}{CLR}.\nIteration: {iteration}{CLR}\n')
+            iteration +=1
+            # Encode and compare to hash
+            c = ''.join(perm)
+            hashed_pass = md5_hash(c)
+            if (str(hashed_pass) == str(hash_list)):
+                print(f'\n\nHash cracked: {c}\n')
+                return
+        index+=1
 
 
 """
@@ -62,7 +89,6 @@ def main():
 
                                                           
 """
-
     print(ascii_art)
 
     # Parse arguments
@@ -80,8 +106,12 @@ def main():
     else:
         hash_value = args.hash
 
-    # Call the cracking function with the provided arguments
-    crack_hash_parallel(hash_value, args.attack, args.dictionary)
+    if args.attack == 'dict':
+        crack_md5_dict(hash_value, args.attack, args.dictionary)
+
+    if args.attack == 'brute':
+        crack_md5_brute(hash_value)
+
 
 if __name__ == '__main__':
     main()
