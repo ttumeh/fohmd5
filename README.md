@@ -21,4 +21,5 @@ MD5 and SHA1 hash cracker
 
 ### Options
 
-`Attack types: dict (Dictionary), brute (Brute-Force)`
+- dict (Dictionary)
+- brute (Brute-Force)
