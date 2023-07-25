@@ -151,7 +151,7 @@ def main():
     parser.add_argument(
         "-l",
         "--length",
-        default="1",
+        default=1,
         help="Specify the length of bruteforced password (default: 1)",
     )
 
@@ -167,7 +167,7 @@ def main():
         crack_md5_dict(hash_value, args.attack, args.dictionary)
 
     if args.attack == "brute":
-        crack_md5_brute(hash_value, int(args.length))
+        crack_md5_brute(hash_value, args.length)
 
 
 if __name__ == "__main__":

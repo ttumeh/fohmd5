@@ -2,7 +2,7 @@
 
 ![Screenshot](main.png)
 
-MD5 hash cracker
+Light weight MD5 hash cracker
 
 ## Getting Started
 
