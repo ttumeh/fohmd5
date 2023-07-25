@@ -30,8 +30,8 @@ def crack_md5_dict(hash_list, hash_type, dictionary_path):
             password = line.strip()
             hashed_pass = md5_hash(password)
             if (hashed_pass == hash_list):
-                print(f"\n\nHash {hash} cracked: {password}\n")
-                break
+                print(f"\n\nHash {hash_list} cracked: {password}\n")
+                return
             else: 
                 print(f'\rCracking Progress: ({index}/{num_lines})', end='', flush=True)
                 # Update tqdm progress bar
