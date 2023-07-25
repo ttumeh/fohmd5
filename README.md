@@ -15,7 +15,7 @@ MD5 hash cracker
 
 `fohmd5.py path/to/hash.txt -a dict -d path/to/dictionary.txt`
 
-`fohmd5.py path/to/hash.txt -a brute`
+`fohmd5.py path/to/hash.txt -a brute -l password_length`
 
 ## Options
 ### Attack types
@@ -23,6 +23,3 @@ MD5 hash cracker
 - dict (Dictionary)
 - brute (Brute-Force)
 
-### Other
-
-- l (Length of bruteforceable password, default = 1)
