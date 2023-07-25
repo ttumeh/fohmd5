@@ -2,13 +2,12 @@
 
 ![Screenshot](main.png)
 
-MD5 and SHA1 hash cracker
+MD5 hash cracker
 
 ## Getting Started
 
 ### Git
     1. Clone the repository: `git clone https://github.com/ttumeh/fohmd5.git`
-    2. Install the requirements: `pip -r requirements.txt`
 
 ### Docker
 
@@ -17,7 +16,9 @@ MD5 and SHA1 hash cracker
 
 ### Syntax
 
-`fohmd5.py path/to/hash.txt -a ATTACK TYPE -d path/to/dictionary.txt`
+`fohmd5.py path/to/hash.txt -a dict -d path/to/dictionary.txt`
+
+`fohmd5.py path/to/hash.txt -a brute`
 
 ## Options
 ### Attack types
