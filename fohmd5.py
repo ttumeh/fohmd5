@@ -43,26 +43,39 @@ def crack_md5_dict(hash_list, hash_type, dictionary_path):
 """
 Crack MD5 hash using brute-force
 """
+# TODO length, wildcards, time
 def crack_md5_brute(hash_list):
     print(f'Cracking {hash_list}.....')
     UP = "\x1B[3A"
     CLR = "\x1B[0K"
-    index = 1
-    iteration = 1
-    # Infinite loop until user exits program
-    while True:
-        perms = list(permutations(string.printable, index))
-        for perm in perms:
-            # Print current combination and iteration
-            print(f'{UP}Testing combination: {perm}{CLR}.\nIteration: {iteration}{CLR}\n')
-            iteration +=1
-            # Encode and compare to hash
-            c = ''.join(perm)
-            hashed_pass = md5_hash(c)
-            if (str(hashed_pass) == str(hash_list)):
-                print(f'\n\nHash cracked: {c}\n')
-                return
-        index+=1
+    calc = 1
+    # Begin
+    for string_length in range(1, 100 + 1):
+        mystring = ['0'] * string_length
+        # Infinite loop until user cancels or pass found
+        while True:
+            for iteration in range(len(string.printable)):
+                char = string.printable[iteration]
+                mystring[-1] = char
+                # Print current combination and iteration
+                print(f'{UP}Testing combination: {mystring}{CLR}.\nIteration: {calc}{CLR}\n')
+                calc += 1
+                c = ''.join(mystring)
+                hashed_pass = md5_hash(c)
+                if (str(hashed_pass) == str(hash_list)):
+                    print(f'\n\nHash cracked: {c}\n')
+                    return
+            # Increment the digits from right to left
+            index = string_length - 1
+            while index >= 0:
+                if mystring[index] == string.printable[-1]:
+                    mystring[index] = string.printable[0]
+                    index -= 1
+                else:
+                    mystring[index] = string.printable[string.printable.index(mystring[index]) + 1]
+                    break
+            else:
+                break
 
 
 """
