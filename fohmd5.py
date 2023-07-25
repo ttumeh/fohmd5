@@ -49,7 +49,7 @@ Crack MD5 hash using brute-force
 
 
 # TODO length, wildcards, time
-def crack_md5_brute(hash_list, length):
+def crack_md5_brute(hash_list, length, max_length):
 
     UP = "\x1B[3A"
     CLR = "\x1B[0K"
@@ -60,7 +60,7 @@ def crack_md5_brute(hash_list, length):
     start_time = time.time()
 
     # Begin
-    for string_length in range(length, 100 + 1):
+    for string_length in range(int(length), int(max_length) + 1):
         mystring = ["0"] * string_length
 
         # Infinite loop until user cancels or pass found
@@ -154,6 +154,12 @@ def main():
         default=1,
         help="Specify the length of bruteforced password (default: 1)",
     )
+    parser.add_argument(
+        "-ml",
+        "--maxlength",
+        default=100,
+        help="Specify the length of bruteforced password (default: 1)",
+    )
 
     args = parser.parse_args()
 
@@ -167,7 +173,7 @@ def main():
         crack_md5_dict(hash_value, args.attack, args.dictionary)
 
     if args.attack == "brute":
-        crack_md5_brute(hash_value, args.length)
+        crack_md5_brute(hash_value, args.length, args.maxlength)
 
 
 if __name__ == "__main__":
