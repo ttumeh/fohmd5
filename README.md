@@ -20,6 +20,6 @@ MD5 hash cracker
 ## Options
 ### Attack types
 
-- dict (Dictionary)
-- brute (Brute-Force)
+- dict (Dictionary Attack)
+- brute (Standard Brute-Force Attack)
 
