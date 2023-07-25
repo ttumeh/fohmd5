@@ -9,9 +9,6 @@ MD5 hash cracker
 ### Git
     1. Clone the repository: `git clone https://github.com/ttumeh/fohmd5.git`
 
-### Docker
-
-
 ## Running The Cracker
 
 ### Syntax
