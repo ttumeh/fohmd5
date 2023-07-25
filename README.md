@@ -22,3 +22,7 @@ MD5 hash cracker
 
 - dict (Dictionary)
 - brute (Brute-Force)
+
+### Other
+
+- l (Length of bruteforceable password, default = 1)
