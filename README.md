@@ -23,3 +23,5 @@ Light weight MD5 hash cracker
 - dict (Dictionary Attack)
 - brute (Standard Brute-Force Attack)
 
+### Arguments
+-l --length: Specify the starting length of bruteforced password (default: 1)  

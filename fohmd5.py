@@ -1,9 +1,11 @@
 import hashlib
 import argparse
-from tqdm.auto import tqdm
 import string
 import time
-import msvcrt
+import math
+
+UP = "\x1B[3A"
+CLR = "\x1B[0K"
 
 """
 Encode password to MD5
@@ -19,7 +21,7 @@ Crack MD5 hash using dictionary
 """
 
 
-def crack_md5_dict(hash_list, hash_type, dictionary_path):
+def crack_md5_dict(hash_list, dictionary_path):
 
     print(f"Cracking {hash_list}.....")
     print(f"Using dictionary from {dictionary_path}.....")
@@ -44,33 +46,30 @@ Crack MD5 hash using brute-force
 
 
 # TODO length, wildcards, time
-def crack_md5_brute(hash_list, length, max_length):
-    UP = "\x1B[3A"
-    CLR = "\x1B[0K"
-    print(f"Cracking {hash_list}.....")
+def crack_md5_brute(hash_list, length, max_length, interval):
 
+    to_go = int(math.factorial(100)/math.factorial((100-int(max_length))))
+    print(f"Cracking {hash_list}.....")
     calc = 1
     start_time = time.time()
-
-    # Begin
+    start_time2 = time.time()
     for string_length in range(int(length), int(max_length) + 1):
         mystring = ["0"] * string_length
 
         # Infinite loop until user cancels or pass found
         while True:
+            if calc != 1 and (time.time() - start_time2) > float(interval):
+                print_progress(calc, ''.join(mystring), start_time, to_go)
+                start_time2 = time.time()
             for iteration in range(len(string.printable)):
                 char = string.printable[iteration]
                 mystring[-1] = char
-
-                elapsed_time = time.time() - start_time
+                
                 calc += 1
                 c = "".join(mystring)
                 hashed_pass = md5_hash(c)
                 if str(hashed_pass) == str(hash_list):
                     print(f"\n\nHash cracked: {c}\n")
-                    print(
-                        f"\nElapsed Time: {elapsed_time:.2f} seconds\nIterations: {calc}\n"
-                    )
                     return
 
             # Increment the digits from right to left
@@ -86,15 +85,20 @@ def crack_md5_brute(hash_list, length, max_length):
                     break
             else:
                 break
+    print("\n\nCracking unsuccessful.\n")
 
 
-def print_combination(mystring, calc, string_length, start_time):
-    UP = "\x1B[3A"
-    CLR = "\x1B[0K"
-    elapsed_time = time.time() - start_time
+"""
+Print progress of the running process
+"""
+
+
+def print_progress(iteration, mystring, start_time, to_go):
+    elapsed_time = round(time.time() - start_time,3)
+    progress=round((iteration/to_go)*100,3)
     print(
-        f"{UP}Testing combination: {mystring}{CLR}.\nIteration: {calc}\nElapsed Time for {string_length}-digit combinations: {elapsed_time:.2f} seconds"
-    )
+        f"Testing combination: {mystring}  Iteration: {iteration}/{to_go}   Elapsed time: {elapsed_time}    Progress: {progress}%"
+        )
 
 
 """
@@ -155,6 +159,13 @@ def main():
         default=100,
         help="Specify the length of bruteforced password (default: 1)",
     )
+    parser.add_argument(
+        "-i",
+        "--interval",
+        default=300,
+        help="Specify interval of progress update (seconds) (default: 300)",
+    )
+
 
     args = parser.parse_args()
 
@@ -168,7 +179,7 @@ def main():
         crack_md5_dict(hash_value, args.attack, args.dictionary)
 
     if args.attack == "brute":
-        crack_md5_brute(hash_value, args.length, args.maxlength)
+        crack_md5_brute(hash_value, args.length, args.maxlength, args.interval)
 
 
 if __name__ == "__main__":
