@@ -15,7 +15,7 @@ Light weight MD5 hash cracker
 
 `fohmd5.py path/to/hash.txt -a dict -d path/to/dictionary.txt`
 
-`fohmd5.py path/to/hash.txt -a brute -l start_length -ml max_length`
+`fohmd5.py path/to/hash.txt -a brute -l start_length -ml max_length -i 300`
 
 ### Options
 #### Attack types
