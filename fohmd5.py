@@ -27,8 +27,6 @@ def crack_md5_dict(hash_list, hash_type, dictionary_path):
     with open(dictionary_path, "r") as dictionary_file:
         num_lines = sum(1 for _ in dictionary_file)
         dictionary_file.seek(0)
-        # Initialize tqdm progress bar
-        progress_bar = tqdm(total=num_lines, position=0, leave=False)
         # Iterate through the dictionary file line by line
         for index, line in enumerate(dictionary_file, start=1):
             password = line.strip()
@@ -36,11 +34,7 @@ def crack_md5_dict(hash_list, hash_type, dictionary_path):
             if hashed_pass == hash_list:
                 print(f"\n\nHash {hash_list} cracked: {password}\n")
                 return
-            else:
-                print(f"\rCracking Progress: ({index}/{num_lines})", end="", flush=True)
-                # Update tqdm progress bar
-                progress_bar.update(1)
-
+            
     print("\n\nPassword not found. Try another dictionary.\n")
 
 
