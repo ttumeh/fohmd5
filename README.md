@@ -23,7 +23,7 @@ Light weight MD5 hash cracker
 - dict (Dictionary Attack)
 - brute (Standard Brute-Force Attack)
 
-### Arguments
+#### Arguments
 -a [--attack]: Select the attack type: dict or brute (default: dict)<br/>
 -d [--dictionary]: Specify the dictionary file for the dictionary attack (default: passwords.txt)<br/>
 -l [--length]: Specify the starting length of bruteforced password (default: 1)<br/>  
