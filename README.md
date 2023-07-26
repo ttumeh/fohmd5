@@ -7,7 +7,7 @@ Light weight MD5 hash cracker
 ## Getting Started
 
 ### Git
-    1. Clone the repository: `git clone https://github.com/ttumeh/fohmd5.git`
+   Clone the repository: `git clone https://github.com/ttumeh/fohmd5.git`
 
 ## Running The Cracker
 
@@ -17,8 +17,8 @@ Light weight MD5 hash cracker
 
 `fohmd5.py path/to/hash.txt -a brute -l start_length -ml max_length`
 
-## Options
-### Attack types
+### Options
+#### Attack types
 
 - dict (Dictionary Attack)
 - brute (Standard Brute-Force Attack)
