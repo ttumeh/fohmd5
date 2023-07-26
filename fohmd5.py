@@ -4,9 +4,6 @@ import string
 import time
 import math
 
-UP = "\x1B[3A"
-CLR = "\x1B[0K"
-
 """
 Encode password to MD5
 """
