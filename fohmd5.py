@@ -25,7 +25,7 @@ def crack_md5_dict(hash_list, hash_type, dictionary_path):
     print(f"Using dictionary from {dictionary_path}.....")
 
     with open(dictionary_path, "r") as dictionary_file:
-        num_lines = sum(1 for _ in dictionary_file)
+        
         dictionary_file.seek(0)
         # Iterate through the dictionary file line by line
         for index, line in enumerate(dictionary_file, start=1):
