@@ -2,7 +2,7 @@
 
 Light weight MD5 hash cracker
 
-![Screenshot](main.png)
+![Screenshot](main1.png)
 
 ## Getting Started
 
