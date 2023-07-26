@@ -24,4 +24,8 @@ Light weight MD5 hash cracker
 - brute (Standard Brute-Force Attack)
 
 ### Arguments
--l --length: Specify the starting length of bruteforced password (default: 1)  
+-a [--attack]: Select the attack type: dict or brute (default: dict)
+-d [--dictionary]: Specify the dictionary file for the dictionary attack (default: passwords.txt)
+-l [--length]: Specify the starting length of bruteforced password (default: 1)  
+-ml [--max-length]: Specify the max length of bruteforced password, i.e. when to stop (default: 1)
+-i [--interval]: Specify the interval of progress update (seconds) (default: 300)
