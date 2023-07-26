@@ -1,8 +1,8 @@
 # fohmd5
 
-![Screenshot](main.png)
-
 Light weight MD5 hash cracker
+
+![Screenshot](main.png)
 
 ## Getting Started
 
