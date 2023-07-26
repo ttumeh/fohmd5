@@ -3,6 +3,7 @@ import argparse
 from tqdm.auto import tqdm
 import string
 import time
+import msvcrt
 
 """
 Encode password to MD5
@@ -50,10 +51,8 @@ Crack MD5 hash using brute-force
 
 # TODO length, wildcards, time
 def crack_md5_brute(hash_list, length, max_length):
-
     UP = "\x1B[3A"
     CLR = "\x1B[0K"
-
     print(f"Cracking {hash_list}.....")
 
     calc = 1
@@ -68,23 +67,16 @@ def crack_md5_brute(hash_list, length, max_length):
             for iteration in range(len(string.printable)):
                 char = string.printable[iteration]
                 mystring[-1] = char
-                # Print current combination and iteration
-                print(
-                    f"{UP}Testing combination: {mystring}{CLR}.\nIteration: {calc}{CLR}\n",
-                    end="",
-                    flush=True,
-                )
 
-                # Add the print statement for elapsed time after the inner for loop
                 elapsed_time = time.time() - start_time
-                print(
-                    f"Elapsed Time for {string_length}-digit combinations: {elapsed_time:.2f} seconds"
-                )
                 calc += 1
                 c = "".join(mystring)
                 hashed_pass = md5_hash(c)
                 if str(hashed_pass) == str(hash_list):
                     print(f"\n\nHash cracked: {c}\n")
+                    print(
+                        f"\nElapsed Time: {elapsed_time:.2f} seconds\nIterations: {calc}\n"
+                    )
                     return
 
             # Increment the digits from right to left
@@ -100,6 +92,15 @@ def crack_md5_brute(hash_list, length, max_length):
                     break
             else:
                 break
+
+
+def print_combination(mystring, calc, string_length, start_time):
+    UP = "\x1B[3A"
+    CLR = "\x1B[0K"
+    elapsed_time = time.time() - start_time
+    print(
+        f"{UP}Testing combination: {mystring}{CLR}.\nIteration: {calc}\nElapsed Time for {string_length}-digit combinations: {elapsed_time:.2f} seconds"
+    )
 
 
 """
